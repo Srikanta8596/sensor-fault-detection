@@ -36,3 +36,72 @@ Before we run the project, make sure that you are having MongoDB in your local s
 
 ## Deployment Archietecture
 ![193536973-4530fe7d-5509-4609-bfd2-cd702fc82423](https://user-images.githubusercontent.com/48283027/198581576-16d96b75-3abc-4c98-a2d5-45384b4ef02b.png)
+
+### Step 1: Clone the repository
+```bash
+git clone https://github.com/sethusaim/Sensor-Fault-Detection.git
+```
+
+### Step 2- Create a conda environment after opening the repository
+
+```bash
+conda create -n sensor python=3.7.6 -y
+```
+
+```bash
+conda activate sensor
+```
+
+### Step 3 - Install the requirements
+```bash
+pip install -r requirements.txt
+```
+
+### Step 4 - Export the environment variable
+```bash
+export AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>
+
+export AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
+
+export AWS_DEFAULT_REGION=<AWS_DEFAULT_REGION>
+
+export MONGODB_URL="mongodb+srv://<username>:<password>@ineuron-ai-projects.7eh1w4s.mongodb.net/?retryWrites=true&w=majority"
+
+```
+
+### Step 5 - Run the application server
+```bash
+python app.py
+```
+
+### Step 6. Train application
+```bash
+http://localhost:8080/train
+
+```
+
+### Step 7. Prediction application
+```bash
+http://localhost:8080/predict
+
+```
+
+## Run locally
+
+1. Check if the Dockerfile is available in the project directory
+
+2. Build the Docker image
+```
+docker build --build-arg AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID> --build-arg AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY> --build-arg AWS_DEFAULT_REGION=<AWS_DEFAULT_REGION> --build-arg MONGODB_URL=<MONGODB_URL> . 
+
+```
+
+3. Run the Docker image
+```
+docker run -d -p 8080:8080 <IMAGE_NAME>
+```
+
+MONGO DB URL: 
+```
+mongodb+srv://temp-user:U8I5A6oh0jJVnVoU@ineuron-ai-projects.7eh1w4s.mongodb.net/admin?authSource=admin&replicaSet=atlas-okvkrd-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true
+```
