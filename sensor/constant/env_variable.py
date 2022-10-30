@@ -1,4 +1,4 @@
-MONGODB_URL_KEY = "MONGO_DB_URL" #"mongodb+srv://-----:-----@ineuron-sensor-project.tr6yswp.mongodb.net/?retryWrites=true&w=majority"
+MONGODB_URL_KEY = "MONGO_DB_URL"
 
 AWS_ACCESS_KEY_ID_ENV_KEY = "AWS_ACCESS_KEY_ID"
 
