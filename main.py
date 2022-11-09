@@ -7,6 +7,9 @@ from sensor.pipeline.training_pipeline import TrainPipeLine
 
 
 if __name__ == '__main__':
-    training_pipeline= TrainPipeLine()
-    training_pipeline.run_pipeline()
+    try:
+        training_pipeline= TrainPipeLine()
+        training_pipeline.run_pipeline()
+    except Exception as e:
+        logging.exception(e)
  
