@@ -1,4 +1,5 @@
 
+
 class TargetValueMapping:
     def __init__(self):
         self.neg: int = 0
@@ -12,13 +13,23 @@ class TargetValueMapping:
         return dict(zip(mapping_response.values(), mapping_response.keys()))
 
 
-#Write a code to train model and check the accuracy.
+#Write a code to train model and check the accuracy. # ASSIGNMENT CODE
 
 class SensorModel:
+    def __init__(self,preprocessor,model):
+        try:
+            self.preprocessor = preprocessor
+            self.model = model
+        except Exception as e:
+            raise e
 
-
-    def get_best_model():
-        pass
+    def predict(self,x):
+        try: 
+            x_transform = self.preprocessor.preprocessor.transform(x)
+            y_hat = self.model.predict(x_transform)
+            return y_hat
+        except Exception as e:
+            raise e
 
 
 
