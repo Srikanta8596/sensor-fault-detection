@@ -5,8 +5,10 @@ from sensor.entity.artifact_entity import DataTransformationArtifact, ModelTrain
 from sensor.entity.config_entity import ModelTrainerConfig
 from sensor.ml.metric.classification_metric import get_classification_score
 import os,sys
-from xgboost import XGBclassifier
-from sensor.ml.model import SensorModel
+#from xgboost import XGBClassifier
+from sklearn.tree import DecisionTreeClassifier
+
+from sensor.ml.model.estimator import SensorModel
 
 class ModelTrainer:
     def __init__(self, model_trainer_config:ModelTrainerConfig, 
@@ -18,7 +20,8 @@ class ModelTrainer:
             raise SensorException(e,sys)
     def train_model(self,x_train,y_train):
         try:
-            xgb_clf=XGBclassifier()
+            #xgb_clf=XGBclassifier()
+            xgb_clf=DecisionTreeClassifier()
             xgb_clf.fit(x_train,y_train)
             return xgb_clf
         except Exception as e:
@@ -58,7 +61,7 @@ class ModelTrainer:
 
             preprocessor = load_object(file_path=self.data_transformation_artifact.transformed_object_file_path)
             
-            model_dir_path = os.pathname(self.model_trainer_config.trained_model_file_path)
+            model_dir_path = os.path.dirname(self.model_trainer_config.trained_model_file_path)
             os.makedirs(model_dir_path,exist_ok=True)
             sensor_model=SensorModel(preprocessor=preprocessor,model=model)
             save_object(self.model_trainer_config.trained_model_file_path,obj=sensor_model)

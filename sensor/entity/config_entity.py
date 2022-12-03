@@ -5,8 +5,9 @@ from datetime import datetime
 #from sensor.constant import prediction_pipeline
 from sensor.constant.training_pipeline import *
 #from sensor.entity.artifact_entity import ClassificationMetricArtifact
-
+from sensor.logger import logging
 TIMESTAMP: str = datetime.now().strftime("%m_%d_%Y_%H_%M_%S")
+logging.info("import Timestamp working fine")
 
 
 class TrainingPipelineConfig:
@@ -89,4 +90,27 @@ class ModelTrainerConfig:
         )
         self.expected_accuracy: float = MODEL_TRAINER_EXPECTED_SCORE
         self.overfitting_underfitting_threshold = MODEL_TRAINER_OVER_FIITING_UNDER_FITTING_THRESHOLD
+
+class ModelEvaluationConfig:
+    def __init__(self,training_pipeline_config:TrainingPipelineConfig):
+        self.model_evaluation_dir: str = os.path.join(
+            training_pipeline_config.artifact_dir, MODEL_EVALUATION_DIR_NAME
+
+        )
+        self.REPORT_FILE_PATH = os.path.join(self.model_evaluation_dir,MODEL_EVALUATION_REPORT_FILE_NAME)
+        self.change_threshold = MODEL_EVALUATION_CHANGED_THRESHOLD_SCORE
+class ModelPusherConfig:
+    def __init__(self,training_pipeline_config:TrainingPipelineConfig):
+        self.model_evaluation_dir: str = os.path.join(
+            training_pipeline_config.artifact_dir, MODEL_PUSHER_DIR_NAME
+
+        )
+        self.model_file_path =os.path.join(self.model_evaluation_dir,MODEL_FILE_NAME) 
+
+        timestamp: str = datetime.now().strftime("%m_%d_%Y_%H_%M_%S")
+        self.saved_model_path= os.path.join(SAVED_MODEL_DIR,f'{timestamp}',MODEL_FILE_NAME)
+        
+
+
+
 
